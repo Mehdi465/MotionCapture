@@ -1,0 +1,8 @@
+- The program should run in real time
+- It should ba able to cope with multiple cameras
+- It should easily fit inside the blender environment 
+- It should track the whole body
+- It can record a chore 
+- It can store a chore 
+- From a recorded chore, it smoothes/filter gesture to have a smooth result 
+
