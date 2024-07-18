@@ -35,6 +35,8 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
 
+        print(results)
+
 cap.release()
 cv2.destroyAllWindows()
 
