@@ -1,8 +1,14 @@
+1)
 - The program should run in real time
+- The animator should place rig manually
+
+2)
 - It should ba able to cope with multiple cameras
 - It should easily fit inside the blender environment 
 - It should track the whole body
-- It can record a chore 
-- It can store a chore 
-- From a recorded chore, it smoothes/filter gesture to have a smooth result 
+
+3)
+- It can record an animation 
+- It can store a animation 
+- From a recorded chore, it smoothes/filter gesture to have a smooth result (or maybe in RT with a small dealy)
 

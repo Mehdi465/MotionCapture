@@ -24,9 +24,9 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
         img = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
     
 
-        #mp_drawing.draw_landmarks(img,results.face_landmarks,mp_holistic.FACEMESH_TESSELATION)
+        mp_drawing.draw_landmarks(img,results.face_landmarks,mp_holistic.FACEMESH_TESSELATION)
         # for pose
-        #mp_drawing.draw_landmarks(img,results.pose_landmarks,mp_holistic.POSE_CONNECTIONS)
+        mp_drawing.draw_landmarks(img,results.pose_landmarks,mp_holistic.POSE_CONNECTIONS)
         frame_counter = 0
         # show cam in a window
         cv2.imshow("camera input",img)
