@@ -1,42 +1,53 @@
-import mediapipe as mp 
+import mediapipe as mp
 import cv2
-import threading
 
 # Set up mediapipe tools
 mp_drawing = mp.solutions.drawing_utils
 mp_holistic = mp.solutions.holistic
 
+# Indices for left eye, right eye, and mouth landmarks (you can add more as needed)
+LEFT_EYE_INDICES = [33, 133, 160, 159, 158, 157, 173, 154, 155, 145, 153, 144, 163, 7, 246]
+RIGHT_EYE_INDICES = [362, 398, 384, 385, 386, 387, 388, 466, 388, 387, 386, 385, 384, 398, 362]
+MOUTH_INDICES = [78, 191, 80, 81, 82, 13, 312, 311, 310, 415, 308, 324, 318, 402, 317, 14, 87, 178, 88, 95, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291]
+
 # Get webcam video
 cap = cv2.VideoCapture(0)
-
-# Global variable to store the result
-results = None
-
-def process_frame(holistic, img):
-    global results
-    results = holistic.process(img)
 
 with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
     while cap.isOpened():
         ret, frame = cap.read()
         
-        if not ret:
-            break
-
         # Color the feed
         img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-        # Start a thread to process the frame
-        thread = threading.Thread(target=process_frame, args=(holistic, img))
-        thread.start()
-        thread.join()
-
-        # Draw results
+        
+        # Detect
+        results = holistic.process(img)
+        
+        # Convert back to BGR for drawing
         img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-        if results:
-            mp_drawing.draw_landmarks(img, results.face_landmarks, mp_holistic.FACEMESH_TESSELATION)
-            mp_drawing.draw_landmarks(img, results.pose_landmarks, mp_holistic.POSE_CONNECTIONS)
-
+        
+        if results.face_landmarks:
+            # Extract and draw the position of left eye landmarks
+            for i in LEFT_EYE_INDICES:
+                landmark = results.face_landmarks.landmark[i]
+                x = int(landmark.x * frame.shape[1])  # Convert normalized coordinates to pixel values
+                y = int(landmark.y * frame.shape[0])
+                cv2.circle(img, (x, y), 2, (0, 255, 0), -1)
+                
+            # Extract and draw the position of right eye landmarks
+            for i in RIGHT_EYE_INDICES:
+                landmark = results.face_landmarks.landmark[i]
+                x = int(landmark.x * frame.shape[1])  # Convert normalized coordinates to pixel values
+                y = int(landmark.y * frame.shape[0])
+                cv2.circle(img, (x, y), 2, (0, 255, 0), -1)
+                
+            # Extract and draw the position of mouth landmarks
+            for i in MOUTH_INDICES:
+                landmark = results.face_landmarks.landmark[i]
+                x = int(landmark.x * frame.shape[1])  # Convert normalized coordinates to pixel values
+                y = int(landmark.y * frame.shape[0])
+                cv2.circle(img, (x, y), 2, (0, 0, 255), -1)
+        
         # Show cam in a window
         cv2.imshow("camera input", img)
 

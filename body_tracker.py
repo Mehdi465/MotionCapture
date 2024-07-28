@@ -12,25 +12,31 @@ cap = cv2.VideoCapture(0)
 with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
     
     while cap.isOpened():
-        ret, frame = cap.read()
+        _, frame = cap.read()
         
         # color the feed
         img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
         
         # detect
         results = holistic.process(img)
-        
-        # draw result there are face_landmarks, pose_landmarks, right or left_hand_landmarks
-        img = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
-    
 
+        # face landmarks
         mp_drawing.draw_landmarks(img,results.face_landmarks,mp_holistic.FACEMESH_TESSELATION)
-        # for pose
-        mp_drawing.draw_landmarks(img,results.pose_landmarks,mp_holistic.POSE_CONNECTIONS)
-        frame_counter = 0
+
         # show cam in a window
         cv2.imshow("camera input",img)
 
+        if results.face_landmarks:
+            mp_drawing.draw_landmarks(img, results.face_landmarks, mp_holistic.FACEMESH_TESSELATION)
+            # Extract the position of each face landmark
+            for i, landmark in enumerate(results.face_landmarks.landmark):
+                x = landmark.x 
+                y = landmark.y 
+                z = landmark.z 
+                
+
+        
+        
         # press q to exit, & 0xFF is for compatibility across different OS
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
