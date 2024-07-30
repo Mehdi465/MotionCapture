@@ -1,13 +1,20 @@
 import mediapipe as mp
 import cv2
 
+def create_file(n_max:int):
+    with open("list_point.txt","w+") as list_file:
+        for k in range(1,n_max+1):
+            list_file.write(f"{k}\n")
+
 def draw_landmarks(indices, color):
                 for i in indices:
-                    input(len(results.face_landmarks.landmark))
                     landmark = results.face_landmarks.landmark[i]
                     x = int(landmark.x * frame.shape[1])  # Convert normalized coordinates to pixel values
                     y = int(landmark.y * frame.shape[0])
                     cv2.circle(img, (x, y), 2, color, -1)
+                    cv2.putText(img, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.3, color, 1, cv2.LINE_AA)
+
+
 
 # Set up mediapipe tools
 mp_drawing = mp.solutions.drawing_utils
