@@ -14,7 +14,25 @@ def draw_landmarks(indices, color):
                     cv2.circle(img, (x, y), 2, color, -1)
                     cv2.putText(img, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.3, color, 1, cv2.LINE_AA)
 
+def get_test_points(steps:int)->list:
+    list_res = []
+    lines = []
+    with open("list_point.txt","r") as list_file:
+        lines = list_file.readlines()
+    index = 0    
+    for line in lines:
+        if index>steps:
+            break
+        list_res.append(int(line.strip()))
+        index +=1
 
+    # rewrite the left points not yet processed
+    with open("list_point.txt","+w") as list_file:
+        list_file.writelines(lines[steps:])
+
+    return list_res    
+
+create_file(468)
 
 # Set up mediapipe tools
 mp_drawing = mp.solutions.drawing_utils
@@ -34,7 +52,7 @@ RIGHT_CHEEK_INDICES = [280, 350, 426, 429, 424, 356, 454, 374, 249]
 LEFT_JAW_INDICES = [234, 93, 132, 58, 172, 136, 150, 176, 148, 152, 377, 378, 379, 365, 367]
 RIGHT_JAW_INDICES = [454, 323, 366, 401, 368, 409, 270, 267, 397, 356, 452, 366, 401, 362]
 NOSE = [1,2,3,4,5]
-TEST_DOT = [450]
+TEST_DOT = get_test_points(10)
 
 DEBUG = True
 # Get webcam video
