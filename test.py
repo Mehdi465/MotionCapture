@@ -1,11 +1,6 @@
 import mediapipe as mp
 import cv2
 
-def create_file(n_max:int):
-    with open("list_point.txt","w+") as list_file:
-        for k in range(1,n_max+1):
-            list_file.write(f"{k}\n")
-
 def draw_landmarks(indices, color):
                 for i in indices:
                     landmark = results.face_landmarks.landmark[i]
@@ -32,8 +27,6 @@ def get_test_points(steps:int)->list:
 
     return list_res    
 
-create_file(468)
-
 # Set up mediapipe tools
 mp_drawing = mp.solutions.drawing_utils
 mp_holistic = mp.solutions.holistic
@@ -46,17 +39,24 @@ LEFT_EYEBROW_INDICES = [70, 63, 105, 66, 107, 55, 65, 52, 53, 46]
 RIGHT_EYEBROW_INDICES = [336, 296, 334, 293, 300, 276, 283, 282, 295, 285]
 
 # those indices are not accurate
-FOREHEAD_INDICES = [9, 10, 338, 297, 332, 284, 251, 389, 356, 454, 323]
-LEFT_CHEEK_INDICES = [187, 50, 101, 118, 117, 111, 120, 47, 115, 220, 237, 239, 241, 238, 20]
-RIGHT_CHEEK_INDICES = [280, 350, 426, 429, 424, 356, 454, 374, 249]
-LEFT_JAW_INDICES = [234, 93, 132, 58, 172, 136, 150, 176, 148, 152, 377, 378, 379, 365, 367]
-RIGHT_JAW_INDICES = [454, 323, 366, 401, 368, 409, 270, 267, 397, 356, 452, 366, 401, 362]
-NOSE = [1,2,3,4,5]
-TEST_DOT = get_test_points(10)
+FOREHEAD_INDICES = [9, 10, 338, 297, 332, 356, 454, 323,67,68,69,103,104,108,109,151,299,297,338,337]
+LEFT_CHEEK_INDICES = [187, 50, 101, 118, 117, 111, 120, 47, 115, 220, 237, 239, 241, 238, 20, 50, 101,111,147]
+RIGHT_CHEEK_INDICES = [280, 350, 426, 429, 424, 356, 454, 374, 249, 187 ,266,280, 340,345,349]
+LEFT_JAW_INDICES = [234, 93, 132, 58, 172, 136, 150, 176, 148, 152, 377, 378, 379,34,58,93,132,138,135,136,149,150,172,215]
+RIGHT_JAW_INDICES = [454, 323, 366, 401, 368, 409, 270, 267, 397, 356, 452, 401, 362, 288, 323, 329,364,361,367,411,435,451,454]
+LEFT_TEMPE = [21,162]
+LEFT_PAUPIERE = [27,28,29,30]
+RIGHT_TEMPE = [251,301,356]
+RIGHT_PAUPIERE = [260,258,257,259]
+NOSE = [1,2,3,4,5,19,49,48,50,59,64,166,168,174,195,197,209,248,278,419,420,439]
+CHIN = [32,140,152,148,200,211,262,368,318,395,18]           
 
-DEBUG = True
+DEBUG = False
 # Get webcam video
 cap = cv2.VideoCapture(0)
+
+if DEBUG:
+    TEST_DOT = get_test_points(20)
 
 with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
     while cap.isOpened():
@@ -88,7 +88,9 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
                 draw_landmarks(LEFT_JAW_INDICES, (255, 0, 255))
                 draw_landmarks(RIGHT_JAW_INDICES, (255, 0, 255))
                 draw_landmarks(NOSE, (0, 255, 0))
-
+                draw_landmarks(CHIN, (255, 0, 0))
+                draw_landmarks(LEFT_TEMPE,(255,255,255))
+                draw_landmarks(RIGHT_TEMPE,(255,255,255))
         # Show cam in a window
         cv2.imshow("camera input", img)
 
