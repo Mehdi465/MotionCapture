@@ -1,5 +1,6 @@
 import mediapipe as mp
 import cv2
+from enum import Enum
 
 def draw_landmarks(indices, color):
                 for i in indices:
@@ -27,9 +28,8 @@ def get_test_points(steps:int)->list:
 
     return list_res    
 
-# Set up mediapipe tools
-mp_drawing = mp.solutions.drawing_utils
-mp_holistic = mp.solutions.holistic
+####-------------------- SCRIPT --------------------- ####
+##########################################################
 
 # Indices for various facial regions. Those indices are accurate
 LEFT_EYE_INDICES = [33, 133, 160, 159, 158, 157, 173, 154, 155, 145, 153, 144, 163, 7, 246]
@@ -44,59 +44,66 @@ LEFT_CHEEK_INDICES = [187, 50, 101, 118, 117, 111, 120, 47, 115, 220, 237, 239, 
 RIGHT_CHEEK_INDICES = [280, 350, 426, 429, 356, 454, 374, 249, 187 ,266,280, 340,345,349]
 LEFT_JAW_INDICES = [234, 93, 132, 58, 172, 136, 150, 176, 148, 152, 377, 378, 379,34,58,93,132,138,135,136,149,150,172,215]
 RIGHT_JAW_INDICES = [454, 323, 366, 401, 368, 397, 356, 452, 401, 362, 288, 323, 329,364,361,367,411,435,451,454]
-LEFT_TEMPE = [21,162]
-LEFT_PAUPIERE = [27,28,29,30]
-RIGHT_TEMPE = [251,301,356]
-RIGHT_PAUPIERE = [260,258,257,259]
-NOSE = [1,2,3,4,5,19,49,48,50,59,64,166,168,174,195,197,209,248,278,419,420,439]
-CHIN = [32,140,152,148,200,211,262,368,395,18,424]           
+LEFT_TEMPE_INDICES = [21,162]
+LEFT_PAUPIERE_INDICES = [27,28,29,30]
+RIGHT_TEMPE_INDICES = [251,301,356]
+RIGHT_PAUPIERE_INDICES = [260,258,257,259]
+NOSE_INDICES = [1,2,3,4,5,19,49,48,50,59,64,166,168,174,195,197,209,248,278,419,420,439]
+CHIN_INDICES = [32,140,152,148,200,211,262,368,395,18,424]
 
-DEBUG = False
-# Get webcam video
-cap = cv2.VideoCapture(0)
+#### -------------- MAIN ------------- ##
 
-if DEBUG:
-    TEST_DOT = get_test_points(20)
+if __name__ == "__main__":
 
-with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
-    while cap.isOpened():
-        ret, frame = cap.read()
-        
-        # Color the feed
-        img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        
-        # Detect
-        results = holistic.process(img)
-        
-        # Convert back to BGR for drawing
-        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-        
-        if results.face_landmarks:
-            # Draw the position of specific landmarks
-            if DEBUG:
-                draw_landmarks(TEST_DOT, (0, 255, 0))
+    # Set up mediapipe tools
+    mp_drawing = mp.solutions.drawing_utils
+    mp_holistic = mp.solutions.holistic
+    DEBUG = False
+    # Get webcam video
+    cap = cv2.VideoCapture(0)
 
-            else:         
-                draw_landmarks(LEFT_EYE_INDICES, (0, 255, 0))
-                draw_landmarks(RIGHT_EYE_INDICES, (0, 255, 0))
-                draw_landmarks(MOUTH_INDICES, (0, 0, 255))
-                draw_landmarks(LEFT_EYEBROW_INDICES, (255, 0, 0))
-                draw_landmarks(RIGHT_EYEBROW_INDICES, (255, 0, 0))
-                draw_landmarks(FOREHEAD_INDICES, (0, 255, 255))
-                draw_landmarks(LEFT_CHEEK_INDICES, (255, 255, 0))
-                draw_landmarks(RIGHT_CHEEK_INDICES, (255, 255, 0))
-                draw_landmarks(LEFT_JAW_INDICES, (255, 0, 255))
-                draw_landmarks(RIGHT_JAW_INDICES, (255, 0, 255))
-                draw_landmarks(NOSE, (0, 255, 0))
-                draw_landmarks(CHIN, (255, 0, 0))
-                draw_landmarks(LEFT_TEMPE,(255,255,255))
-                draw_landmarks(RIGHT_TEMPE,(255,255,255))
-        # Show cam in a window
-        cv2.imshow("camera input", img)
+    if DEBUG:
+        TEST_DOT = get_test_points(20)
 
-        # Press q to exit, & 0xFF is for compatibility across different OS
-        if cv2.waitKey(10) & 0xFF == ord('q'):
-            break
+    with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
+        while cap.isOpened():
+            ret, frame = cap.read()
 
-cap.release()
-cv2.destroyAllWindows()
+            # Color the feed
+            img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+            # Detect
+            results = holistic.process(img)
+
+            # Convert back to BGR for drawing
+            img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+            if results.face_landmarks:
+                # Draw the position of specific landmarks
+                if DEBUG:
+                    draw_landmarks(TEST_DOT, (0, 255, 0))
+
+                else:         
+                    draw_landmarks(LEFT_EYE_INDICES, (0, 255, 0))
+                    draw_landmarks(RIGHT_EYE_INDICES, (0, 255, 0))
+                    draw_landmarks(MOUTH_INDICES, (0, 0, 255))
+                    draw_landmarks(LEFT_EYEBROW_INDICES, (255, 0, 0))
+                    draw_landmarks(RIGHT_EYEBROW_INDICES, (255, 0, 0))
+                    draw_landmarks(FOREHEAD_INDICES, (0, 255, 255))
+                    draw_landmarks(LEFT_CHEEK_INDICES, (255, 255, 0))
+                    draw_landmarks(RIGHT_CHEEK_INDICES, (255, 255, 0))
+                    draw_landmarks(LEFT_JAW_INDICES, (255, 0, 255))
+                    draw_landmarks(RIGHT_JAW_INDICES, (255, 0, 255))
+                    draw_landmarks(NOSE_INDICES, (0, 255, 0))
+                    draw_landmarks(CHIN_INDICES, (255, 0, 0))
+                    draw_landmarks(LEFT_TEMPE_INDICES,(255,255,255))
+                    draw_landmarks(RIGHT_TEMPE_INDICES,(255,255,255))
+            # Show cam in a window
+            cv2.imshow("camera input", img)
+
+            # Press q to exit, & 0xFF is for compatibility across different OS
+            if cv2.waitKey(10) & 0xFF == ord('q'):
+                break
+
+    cap.release()
+    cv2.destroyAllWindows()
