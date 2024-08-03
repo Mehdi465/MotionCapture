@@ -1,6 +1,6 @@
 import mediapipe as mp
 import cv2
-from enum import Enum
+import landmark_point as lp
 
 def draw_landmarks(indices, color):
                 for i in indices:
@@ -28,28 +28,6 @@ def get_test_points(steps:int)->list:
 
     return list_res    
 
-####-------------------- SCRIPT --------------------- ####
-##########################################################
-
-# Indices for various facial regions. Those indices are accurate
-LEFT_EYE_INDICES = [33, 133, 160, 159, 158, 157, 173, 154, 155, 145, 153, 144, 163, 7, 246]
-RIGHT_EYE_INDICES = [362, 382, 381, 380, 374, 373, 390, 249, 263, 466, 388, 387, 386, 385, 384, 398]
-MOUTH_INDICES = [78, 191, 80, 81, 82, 13, 312, 311, 310, 415, 308, 324, 318, 402, 317, 14, 87, 178, 88, 95, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291]
-LEFT_EYEBROW_INDICES = [70, 63, 105, 66, 107, 55, 65, 52, 53, 46]
-RIGHT_EYEBROW_INDICES = [336, 296, 334, 293, 300, 276, 283, 282, 295, 285]
-
-# those indices are not accurate
-FOREHEAD_INDICES = [9, 10, 338, 297, 332, 356, 454, 323,67,68,69,103,104,108,109,151,299,297,338,337,333]
-LEFT_CHEEK_INDICES = [187, 50, 101, 118, 117, 111, 120, 47, 115, 220, 237, 239, 241, 238, 20, 50, 101,111,147]
-RIGHT_CHEEK_INDICES = [280, 350, 426, 429, 356, 454, 374, 249, 187 ,266,280, 340,345,349]
-LEFT_JAW_INDICES = [234, 93, 132, 58, 172, 136, 150, 176, 148, 152, 377, 378, 379,34,58,93,132,138,135,136,149,150,172,215]
-RIGHT_JAW_INDICES = [454, 323, 366, 401, 368, 397, 356, 452, 401, 362, 288, 323, 329,364,361,367,411,435,451,454]
-LEFT_TEMPE_INDICES = [21,162]
-LEFT_PAUPIERE_INDICES = [27,28,29,30]
-RIGHT_TEMPE_INDICES = [251,301,356]
-RIGHT_PAUPIERE_INDICES = [260,258,257,259]
-NOSE_INDICES = [1,2,3,4,5,19,49,48,50,59,64,166,168,174,195,197,209,248,278,419,420,439]
-CHIN_INDICES = [32,140,152,148,200,211,262,368,395,18,424]
 
 #### -------------- MAIN ------------- ##
 
@@ -84,20 +62,22 @@ if __name__ == "__main__":
                     draw_landmarks(TEST_DOT, (0, 255, 0))
 
                 else:         
-                    draw_landmarks(LEFT_EYE_INDICES, (0, 255, 0))
-                    draw_landmarks(RIGHT_EYE_INDICES, (0, 255, 0))
-                    draw_landmarks(MOUTH_INDICES, (0, 0, 255))
-                    draw_landmarks(LEFT_EYEBROW_INDICES, (255, 0, 0))
-                    draw_landmarks(RIGHT_EYEBROW_INDICES, (255, 0, 0))
-                    draw_landmarks(FOREHEAD_INDICES, (0, 255, 255))
-                    draw_landmarks(LEFT_CHEEK_INDICES, (255, 255, 0))
-                    draw_landmarks(RIGHT_CHEEK_INDICES, (255, 255, 0))
-                    draw_landmarks(LEFT_JAW_INDICES, (255, 0, 255))
-                    draw_landmarks(RIGHT_JAW_INDICES, (255, 0, 255))
-                    draw_landmarks(NOSE_INDICES, (0, 255, 0))
-                    draw_landmarks(CHIN_INDICES, (255, 0, 0))
-                    draw_landmarks(LEFT_TEMPE_INDICES,(255,255,255))
-                    draw_landmarks(RIGHT_TEMPE_INDICES,(255,255,255))
+                    #draw_landmarks(lp.LEFT_EYE_INDICES, (0, 255, 0))
+                    #draw_landmarks(RIGHT_EYE_INDICES, (0, 255, 0))
+                    #draw_landmarks(MOUTH_INDICES, (0, 0, 255))
+                    #draw_landmarks(LEFT_EYEBROW_INDICES, (255, 0, 0))
+                    #draw_landmarks(RIGHT_EYEBROW_INDICES, (255, 0, 0))
+                    #draw_landmarks(FOREHEAD_INDICES, (0, 255, 255))
+                    #draw_landmarks(LEFT_CHEEK_INDICES, (255, 255, 0))
+                    #draw_landmarks(RIGHT_CHEEK_INDICES, (255, 255, 0))
+                    #draw_landmarks(LEFT_JAW_INDICES, (255, 0, 255))
+                    #draw_landmarks(RIGHT_JAW_INDICES, (255, 0, 255))
+                    #draw_landmarks(NOSE_INDICES, (0, 255, 0))
+                    #draw_landmarks(CHIN_INDICES, (255, 0, 0))
+                    #draw_landmarks(LEFT_TEMPE_INDICES,(255,255,255))
+                    #draw_landmarks(RIGHT_TEMPE_INDICES,(255,255,255))
+                    draw_landmarks(lp.FOREHEAD_INDICES,(0,255,255))
+
             # Show cam in a window
             cv2.imshow("camera input", img)
 
