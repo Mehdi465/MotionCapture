@@ -2,105 +2,23 @@ from enum import Enum
 
 ### All face indices 
 # Indices for various facial regions. Those indices are accurate
-LEFT_EYE_INDICES = [33, 133, 160, 159, 158, 157, 173, 154, 155, 145, 153, 144, 163, 7, 246]
-RIGHT_EYE_INDICES = [362, 382, 381, 380, 374, 373, 390, 249, 263, 466, 388, 387, 386, 385, 384, 398]
+LEFT_EYE_INDICES = [157,158,159]  # , 
+RIGHT_EYE_INDICES = [362, 382,  263, 386, 374,373,384,  398]# 380, 374,373,384,385,387,388,385,249
 MOUTH_INDICES = [78, 191, 80, 81, 82, 13, 312, 311, 310, 415, 308, 324, 318, 402, 317, 14, 87, 178, 88, 95, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291]
 LEFT_EYEBROW_INDICES = [70, 63, 105, 66, 107, 55, 65, 52, 53, 46]
-RIGHT_EYEBROW_INDICES = [336, 296, 334, 293, 300, 276, 283, 282, 295, 285]
+RIGHT_EYEBROW_INDICES =  [33, 160, 158, 133, 153, 144]#[336, 296, 334, 293, 300, 276, 283, 282, 295, 285] 
 
 FOREHEAD_INDICES = [9, 10, 338, 297, 332,67,68,69,103,104,108,109,151,299,297,338,337,333]
-LEFT_CHEEK_INDICES = [187, 50, 101, 118, 117, 111, 120, 47, 115, 220, 237, 239, 241, 238, 20, 50, 101,111,147]
-RIGHT_CHEEK_INDICES = [280, 350, 426, 429, 356, 454, 374, 249, 187 ,266,280, 340,345,349]
-LEFT_JAW_INDICES = [234, 93, 132, 58, 172, 136, 150, 176, 148, 152, 377, 378, 379,34,58,93,132,138,135,136,149,150,172,215]
-RIGHT_JAW_INDICES = [454, 323, 366, 401, 368, 397, 356, 452, 401, 362, 288, 323, 329,364,361,367,411,435,451,454]
+LEFT_CHEEK_INDICES = [187, 118, 117, 120, 47, 50, 101,111,147]
+RIGHT_CHEEK_INDICES = [280, 350, 426, 429, 356, 454, 249 ,266,280, 340,345,349]
+LEFT_JAW_INDICES = [234, 93, 132, 58, 172, 136, 150,34,58,93,132,138,135,136,149,150,172,215]
+RIGHT_JAW_INDICES = [454, 323, 366, 401, 368, 397, 356, 401, 288, 323,364,361,367,411,435,454]
 LEFT_TEMPE_INDICES = [21,162]
 LEFT_PAUPIERE_INDICES = [27,28,29,30]
-#RIGHT_TEMPE_INDICES = [251,301,356]
+RIGHT_TEMPE_INDICES = [251,301,356]
 RIGHT_PAUPIERE_INDICES = [260,258,257,259]
-NOSE_INDICES = [1,2,3,4,5,19,49,48,50,59,64,166,168,174,195,197,209,248,278,419,420,439]
-CHIN_INDICES = [32,140,152,148,200,211,262,368,395,18,424]
-
-""" DICT_METARING_LANDMARK_FACE = { temple_R_B : 356,
-                                forehead_R_002 : ,
-                                forehead_R_001 : ,
-                                forehead_R : ,
-                                temple_R_T : 251,
-                                brow_T_R : ,
-                                brow_T_R_001 : ,
-                                brow_T_R_002 : ,
-                                brow_T_R_003 : ,
-                                brow_B_R : ,
-                                brow_B_R_001 : ,
-                                brow_B_R_002 : ,
-                                brow_B_R_003 : ,
-                                lid_T_R 
-                                lid_T_R_001 : ,
-                                lid_T_R_002 : ,
-                                lid_T_R_003 : ,
-                                lid_B_R : ,
-                                lid_B_R_001 : ,
-                                lid_B_R_002 : ,
-                                lid_B_R_003 : ,
-                                cheek_T_R : ,
-                                cheek_T_R_001 : ,
-                                cheek_B_R : 
-                                cheek_B_R_001 : ,
-                                nose : ,
-                                nose_001 : ,
-                                nose_002 : ,
-                                nose_003 : ,
-                                nose_004 : ,
-                                nose_R : ,
-                                nose_R_001 : , 
-                                jaw : ,
-                                jaw_R = 33 
-                                jaw_R_001 = 34
-                                lip_T = 35
-                                lip_T_R = 36
-                                lip_T_R_001 = 37
-                                lip_B = 38
-                                lip_B_R = 39
-                                lip_B_R_001 = 40
-                                chin = 41
-                                chin_001 = 42
-                                # Left landmarks
-                                temple_L_B = 43
-                                forehead_L_002 = 44
-                                forehead_L_001 = 45
-                                forehead_L = 46
-                                temple_L_T = 47
-                                brow_T_L = 48
-                                brow_T_L_001 = 49
-                                brow_T_L_002 = 50
-                                brow_T_L_002 = 51
-                                brow_T_L_003 = 52
-                                brow_B_L = 53
-                                brow_B_L_001 = 54
-                                brow_B_L_002 = 55
-                                brow_B_L_002 = 56
-                                brow_B_L_003 = 57
-                                lid_T_L = 58
-                                lid_T_L_001 = 59
-                                lid_T_L_002 = 60
-                                lid_T_L_003 = 61
-                                lid_B_L = 62
-                                lid_B_L_001 = 63
-                                lid_B_L_002 = 64
-                                lid_B_L_003 = 65
-                                cheek_T_L = 66
-                                cheek_T_L_001 = 67
-                                cheek_B_L = 68
-                                cheek_B_L_001 = 69
-                                nose_L = 70
-                                nose_L_001 = 71
-                                jaw_L = 72
-                                jaw_L_001 = 73
-                                lip_T_L = 74
-                                lip_T_L_001 = 75
-                                lip_B_L = 76
-                                lip_B_L_001 = 77
-
-} """
+NOSE_INDICES = [1,2,3,4,5,19,49,48,59,64,166,168,174,195,197,209,248,278,419,420,439]
+CHIN_INDICES = [32,140,152,148,200,211,262,395,18,424]
 
 
 class LandmarkPoint(Enum):
@@ -184,3 +102,86 @@ class LandmarkPoint(Enum):
     lip_T_L_001 = 73
     lip_B_L = 74
     lip_B_L_001 = 75
+    chin_R = 76
+    chin_L = 77
+
+    DICT_METARING_LANDMARK_FACE = { temple_R_B : 356,
+                                forehead_R_002 : 103,
+                                forehead_R_001 : 87,
+                                forehead_R : 109,
+                                temple_R_T : 251,
+                                brow_T_R : 70,
+                                brow_T_R_001 : 105,
+                                brow_T_R_002 : 107,
+                                brow_T_R_003 : 9,
+                                brow_B_R : 30,
+                                brow_B_R_001 : 29,
+                                brow_B_R_002 : 28,
+                                brow_B_R_003 : 168,
+                                lid_T_R : 33,
+                                lid_T_R_001 : 159,
+                                lid_T_R_002 : 158,
+                                lid_T_R_003 : 133,
+                                lid_B_R : 154,
+                                lid_B_R_001 : 144,
+                                lid_B_R_002 : 7,
+                                lid_B_R_003 : 155,
+                                cheek_T_R : 50,
+                                cheek_T_R_001 : 47,
+                                cheek_B_R : 147,
+                                cheek_B_R_001 : 111,
+                                nose : 5,
+                                nose_001 : 4,
+                                nose_002 : 1,
+                                nose_003 : 19,
+                                nose_004 : 2,
+                                nose_R : 48,
+                                nose_R_001 : 4, 
+                                jaw : 152,
+                                jaw_R : 58,
+                                jaw_R_001 : 149,
+                                lip_T : 13,
+                                lip_T_R : 80,
+                                lip_T_R_001 : 185,
+                                lip_B : 14,
+                                lip_B_R : 88,
+                                lip_B_R_001 : 185,
+                                chin : 18,  # not completly sure, 18 is just under the lip
+                                chin_001 : 200,
+                                chin_R : 185,
+                                temple_L_B : 251,
+                                forehead_L_002 : 332,
+                                forehead_L_001 : 297,
+                                forehead_L : 338,
+                                temple_L_T : 356,
+                                brow_T_L : 300,
+                                brow_T_L_001 : 334,
+                                brow_T_L_002 : 336,
+                                brow_T_L_003 : 9,
+                                brow_B_L : 260,
+                                brow_B_L_001 : 259,
+                                brow_B_L_002 : 258, 
+                                brow_B_L_003 : 193,
+                                lid_T_L : 388,
+                                lid_T_L_001 : 375,
+                                lid_T_L_002 : 385,
+                                lid_T_L_003 : 382,
+                                lid_B_L : 380,
+                                lid_B_L_001 : 374,
+                                lid_B_L_002 : 249,
+                                lid_B_L_003 : 263,
+                                cheek_T_L : 280,
+                                cheek_T_L_001 : 349,
+                                cheek_B_L : 411,
+                                cheek_B_L_001 : 345,
+                                nose_L : 278,
+                                nose_L_001 : 4,
+                                jaw_L : 288,
+                                jaw_L_001 : 395,
+                                lip_T_L : 310,
+                                lip_T_L_001 : 291,
+                                lip_B_L : 318,
+                                lip_B_L_001 : 291,
+                                chin_L : 291
+}
+

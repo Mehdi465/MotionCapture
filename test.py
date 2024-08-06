@@ -8,7 +8,7 @@ def draw_landmarks(indices, color):
                     x = int(landmark.x * frame.shape[1])  # Convert normalized coordinates to pixel values
                     y = int(landmark.y * frame.shape[0])
                     cv2.circle(img, (x, y), 2, color, -1)
-                    cv2.putText(img, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.3, color, 1, cv2.LINE_AA)
+                    cv2.putText(img, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.4, color, 1, cv2.LINE_AA)  
 
 def get_test_points(steps:int)->list:
     list_res = []
@@ -76,7 +76,7 @@ if __name__ == "__main__":
                     #draw_landmarks(CHIN_INDICES, (255, 0, 0))
                     #draw_landmarks(LEFT_TEMPE_INDICES,(255,255,255))
                     #draw_landmarks(RIGHT_TEMPE_INDICES,(255,255,255))
-                    draw_landmarks(lp.FOREHEAD_INDICES,(0,255,255))
+                    draw_landmarks(lp.RIGHT_EYEBROW_INDICES,(255,255,255))
 
             # Show cam in a window
             cv2.imshow("camera input", img)
