@@ -1,5 +1,5 @@
 1)
-- The program should run in real time
+- The program should run in real time (a small dleay is accpeted < 0.3s)
 - The animator should place rig manually
 - It should track the face
 
@@ -9,6 +9,6 @@
 - It should track the whole body
 
 3)
-- It can record and strore an animation  
+- It can record and store an animation  
 - From a recorded chore, it smoothes/filter gesture to have a smooth result (or maybe in RT with a small delay)
 

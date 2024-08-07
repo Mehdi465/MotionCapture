@@ -20,7 +20,6 @@ RIGHT_PAUPIERE_INDICES = [260,258,257,259]
 NOSE_INDICES = [1,2,3,4,5,19,49,48,59,64,166,168,174,195,197,209,248,278,419,420,439]
 CHIN_INDICES = [32,140,152,148,200,211,262,395,18,424]
 
-
 class LandmarkPoint(Enum):
     # Right landmarks
     temple_R_B = 0
@@ -104,7 +103,8 @@ class LandmarkPoint(Enum):
     lip_B_L_001 = 75
     chin_R = 76
     chin_L = 77
-
+    
+    # Association landmark and metaring in blender
     DICT_METARING_LANDMARK_FACE = { temple_R_B : 356,
                                 forehead_R_002 : 103,
                                 forehead_R_001 : 87,
@@ -184,4 +184,6 @@ class LandmarkPoint(Enum):
                                 lip_B_L_001 : 291,
                                 chin_L : 291
 }
+    
+    def 
 

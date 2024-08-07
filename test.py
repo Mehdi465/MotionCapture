@@ -37,6 +37,7 @@ if __name__ == "__main__":
     mp_drawing = mp.solutions.drawing_utils
     mp_holistic = mp.solutions.holistic
     DEBUG = False
+    
     # Get webcam video
     cap = cv2.VideoCapture(0)
 
