@@ -21,6 +21,24 @@ def replace_R_by_L():
     
     print("Modification done")
 
+def get_test_points(steps:int)->list:
+    list_res = []
+    lines = []
+    with open("list_point.txt","r") as list_file:
+        lines = list_file.readlines()
+    index = 0    
+    for line in lines:
+        if index>steps:
+            break
+        list_res.append(int(line.strip()))
+        index +=1
+
+    # rewrite the left points not yet processed
+    with open("list_point.txt","+w") as list_file:
+        list_file.writelines(lines[steps:])
+
+    return list_res    
+
 if __name__ == "__main__":
     replace_R_by_L()
 

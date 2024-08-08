@@ -1,0 +1,14 @@
+Assuming that get_position is done
+
+1) get familiar with blender API : the objective is to create a panel with option that can be used, such as record animation, choose filter.
+Among blender api features, those needs to be studied:
+    - Edit any data the user interface can (Scenes, Meshes, Particles etc.).
+    ~ Modify user preferences, keymaps and themes.*
+    - Run tools with own settings.
+    - Create user interface elements such as menus, headers and panels
+    - Create new tools.
+    - Create interactive tools
+
+2) See how to link script and metaring object
+3) implement record and store animation
+4) get familiar with filter for position
