@@ -206,12 +206,15 @@ class Metaring:
         pass
 
     def store_position():
+        """Storeposition in a certain file type, to be easy read by Blender or UE5"""
         pass
 
     def filter():
+        """Filter stored animation according multiple parameters, mostly low pass band the animation to remove all buzzling """
         pass
 
     def filter_in_RT():
+        """Filter erratic movment of uncertatiude recorded points, but in Real Time"""
         pass
 
 
