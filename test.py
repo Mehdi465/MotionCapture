@@ -51,7 +51,6 @@ if __name__ == "__main__":
                 # draw all selected landmark
                 draw_landmarks(list(Metaring.DICT_METARING_LANDMARK_FACE.values()),(255,255,255))
 
-                print(positions)
 
             # Show cam in a window
             cv2.imshow("camera input", img)
