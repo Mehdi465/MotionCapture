@@ -1,14 +1,15 @@
 1)
 - The program should run in real time (a small delay is accepted < 0.3s)
-- The animator should place rig manually
-- It should track the face
+- The animator should place rig manually on the model
+- It should track only the face in a first iteration
 
 2)
-- It should ba able to cope with multiple cameras
+- It should be able to cope with multiple cameras
 - It should easily fit inside the blender environment
 - It should track the whole body
 
 3)
 - It can record and store an animation
 - From a recorded chore, it smoothes/filter gesture to have a smooth result (or maybe in RT with a small delay)
+- it should track the face and the body at the same time
 

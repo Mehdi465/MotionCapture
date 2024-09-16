@@ -1,0 +1,18 @@
+schema_version = "1.0.0"
+
+id = "addon_test"
+version = "1.0.0"
+name = "Test add on"
+tagline = "Peu de freres qui gagnent"
+maintainer = "Mehdi La Cisaille"
+type = "add-on"
+
+# Optional link to documentation, support, source files, etc
+# website = "https://www.yourwebsite_with_documentation.com/"
+
+tags = ["Modeling"]
+
+blender_version_min = "4.2.0"
+
+# License conforming to https://spdx.org/licenses/ (use "SPDX: prefix)
+license = ["SPDX:GPL-2.0-or-later"]

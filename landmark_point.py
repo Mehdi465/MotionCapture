@@ -1,4 +1,5 @@
 from enum import Enum
+import bpy
 
 ### All face indices
 # Indices for various facial regions. Those indices are accurate
@@ -185,6 +186,10 @@ class Metaring:
                                 LandmarkPoint.chin_L : 291
 }
 
+    def check_environment():
+        """takes care if the metaring is existing, correctly set up etc.."""
+        pass
+
     def get_position(result,points:dict) -> dict:
         """extract position on the image based on a dict containing all points needed
         :param result: result of mediapipe holistic process
@@ -193,17 +198,28 @@ class Metaring:
         res_positions = {}
         # for all selected points
         for point in points:
+            # get the landmark
             landmark = result.face_landmarks.landmark[points[point]]
             x = landmark.x
             y = landmark.y
             z = landmark.z
+            # add 3D coordinates for the current point
             res_positions[point]=(x, y, z)
 
         return res_positions
 
-    def set_metaring_position():
-        """move metaring position in blender, takes care if the metaring is existing, correctly set up etc.."""
-        pass
+    def move_one_metaring(point:int,positions:tuple):
+        """Move one metaring of the blender model
+        :param point: current point (Metaring) processed
+        :param positions: current position of the point"""
+        bpy.ops.transform.translate(value=positions, orient_type='GLOBAL', orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)),
+                                    orient_matrix_type='GLOBAL', mirror=False, snap=False, snap_elements={'INCREMENT'}, use_snap_project=False, snap_target='CLOSEST',
+                                    use_snap_self=True, use_snap_edit=True, use_snap_nonedit=True, use_snap_selectable=False)
+
+    def move_metaring_(points:dict):
+        """move metaring position in blender"""
+        for point in points:
+            move_one_metaring(point,points[point])
 
     def store_position():
         """Storeposition in a certain file type, to be easy read by Blender or UE5"""
