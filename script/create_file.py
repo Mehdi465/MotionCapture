@@ -10,15 +10,15 @@ def replace_R_by_L():
         lines = file_.readlines()
         list_element = []
         print(lines)
-        
+
         for line in lines:
             if "R" in line:
                 list_element.append(line.replace('R','L'))
 
     with open("file_inter.txt", 'w+') as file_:
         for element in list_element:
-            file_.write(element)  
-    
+            file_.write(element)
+
     print("Modification done")
 
 def get_test_points(steps:int)->list:
@@ -26,7 +26,7 @@ def get_test_points(steps:int)->list:
     lines = []
     with open("list_point.txt","r") as list_file:
         lines = list_file.readlines()
-    index = 0    
+    index = 0
     for line in lines:
         if index>steps:
             break
@@ -37,8 +37,23 @@ def get_test_points(steps:int)->list:
     with open("list_point.txt","+w") as list_file:
         list_file.writelines(lines[steps:])
 
-    return list_res    
+    return list_res
+
+def remove_int_by_str():
+    l = []
+    with open("input.txt","r+") as opt_file:
+        lines = opt_file.readlines()
+        for line in lines:
+            line.strip()
+            line_split = line.split("=")
+            l.append((line_split[0].strip(),f"\"{line_split[0].strip()}\""))
+
+    with open("input_final.txt","w+") as opt_file:
+        for line in l:
+            opt_file.write(f"{line[0]} = {line[1]} \n")
 
 if __name__ == "__main__":
-    replace_R_by_L()
+    remove_int_by_str()
+
+
 
