@@ -1,1 +1,1 @@
-Add body tracking
+Add body tracking alongside face tracking
